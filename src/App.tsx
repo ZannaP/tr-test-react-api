@@ -1,21 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+    axios.get('https://swapi.dev/api/people')
+      .then((data) => {
+        console.log(data);
+        setPeople(data.data?.results);
+        debugger
+      })
+  }, []);
+  // const getPeople = async () => { 
+  //   const apiResponse = await axios.get('https://swapi.dev/api/people');
+  //   setPeople(apiResponse.data);
+  // }
 
   return (
     <>
-
-
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+{people}
       </div>
- 
     </>
   )
 }
