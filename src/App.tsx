@@ -9,18 +9,26 @@ function App() {
       .then((data) => {
         console.log(data);
         setPeople(data.data?.results);
-        debugger
+        console.log(people);
+        //debugger
       })
   }, []);
-  // const getPeople = async () => { 
-  //   const apiResponse = await axios.get('https://swapi.dev/api/people');
-  //   setPeople(apiResponse.data);
-  // }
 
   return (
     <>
       <div className="card">
-{people}
+        {people.length ?
+          (<>
+            <h4>{people[0].name}</h4>
+            <ul>
+              <li>Hair color: {people[0].hair_color}</li>
+              <li>Eye color: {people[0].eye_color}</li>
+              <li>Birth year: { people[0].birth_year }</li>
+            </ul>
+          </>
+          )
+          : (<>Loading...</>)
+        }
       </div>
     </>
   )
